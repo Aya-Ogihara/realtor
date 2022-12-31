@@ -3,7 +3,27 @@ import Image from 'next/image';
 import { Flex, Box, Text, Button } from '@chakra-ui/react';
 import { Banner } from './Banner';
 
-const Home = () => {
+import { baseUrl, fetchApi } from '../utils/fetchApi';
+
+export const getStaticProps = async () => {
+  const propertyForSale = await fetchApi(
+    `${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`
+  );
+  const propertyForRent = await fetchApi(
+    `${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`
+  );
+
+  return {
+    props: {
+      propertyForSale: propertyForSale?.hits,
+      propertyForRent: propertyForRent?.hits,
+    },
+  };
+};
+
+const Home = ({ propertyForSale, propertyForRent }) => {
+  console.log(propertyForSale);
+  console.log(propertyForRent);
   return (
     <Box>
       <Banner

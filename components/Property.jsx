@@ -39,11 +39,7 @@ export const Property = ({
         />
       </Box>
       <Box w='full'>
-        <Flex
-          paddingTop='2'
-          alignCenter='center'
-          justifyContent='space-between'
-        >
+        <Flex paddingTop='2' alignItems='center' justifyContent='space-between'>
           <Flex alignItems='center'>
             <Box paddingRight='3' color='green.400'>
               {isVerified && <GoVerified />}
@@ -68,6 +64,9 @@ export const Property = ({
           <FaBed />| {baths}
           <FaBath />| {millify(area)}sqft <BsGridFill />
         </Flex>
+        <Text fontSize='lg'>
+          {title.length > 30 ? `${title.substring(0, 30)}...` : title}
+        </Text>
       </Box>
     </Flex>
   </Link>
